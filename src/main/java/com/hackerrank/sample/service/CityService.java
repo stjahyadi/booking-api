@@ -11,9 +11,14 @@ public class CityService {
 
     @Autowired
     private CityRepository cityRepository;
-    public City getCity(String cityId){
-        return cityRepository.findById(cityId).orElseThrow(() -> {
-                throw new CityNotFoundException("City with id "+cityId+" is not found!");
+    public City getCity(String cityId) {
+//        return cityRepository.findById(cityId).orElseThrow(() -> {
+//                throw new CityNotFoundException("City with id "+cityId+" is not found!");
+//        });
+
+        return cityRepository.findById(cityId).
+                <CityNotFoundException>orElseThrow(() -> {
+                    throw new CityNotFoundException("City with id "+cityId+" is not found!");
         });
     }
 }
